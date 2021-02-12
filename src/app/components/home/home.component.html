@@ -1,0 +1,87 @@
+<div class="loader" *ngIf="!flag"></div>
+<!--Main layout-->
+<main class=" pt-5 s" *ngIf="flag">
+  <div class="container">
+
+    <!--Section: Jumbotron-->
+    <section class="card wow fadeIn" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/gradient1.jpg);">
+
+      <!-- Content -->
+      <div class="card-body text-white text-center py-5 px-5 my-5">
+
+        <h1 class="mb-4">
+          <strong>Welcome {{user.Name}} In Your Blog</strong>
+        </h1>
+        <p>
+          <strong>Take your time to check all things</strong>
+        </p>
+        <p class="mb-4">
+          <strong>The most comprehensive tutorial for the Bootstrap 4. Loved by over 500 000 users. Video and written
+            versions available. Create your own, stunning website.</strong>
+        </p>
+       
+
+      </div>
+      <!-- Content -->
+    </section>
+    <!--Section: Jumbotron-->
+
+    <hr class="my-5">
+
+    <!--Section: Cards-->
+    <section class="text-center">
+         
+
+      <!--Grid row-->
+      <div class="row mb-4 wow fadeIn">
+
+      
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let b of blogs">
+
+          <!--Card-->
+          <div class="card bg-dark text-light">
+            <!--user data -->
+            <div class="d-flex bg-dark ">
+              <img src="{{'http://localhost:9000/'+b.author.img}}" id="userImgBlog"/>
+             
+              <span class="m-3 text-light " >{{b.author.Name}}</span>
+           </div>
+           <hr>
+           <!--end of user data -->
+            <!--Card image-->
+            <div class="view overlay">
+              <img src="{{'http://localhost:9000/'+b.img}}"  class="card-img-top" alt="" height="250vw" >
+            
+               
+            </div>
+
+            <!--Card content-->
+            <div class="card-body">
+              <!--Title-->
+              <h4 class="card-title">{{b.title}}</h4>
+              <!--Text-->
+              <p class=" d-inline card-text">{{b.body.substring(0,201)}}..</p>
+              <a routerLink="/blog/get/{{b._id}}"  class=" link btn btn-md">show more
+                
+              </a>
+            </div>
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+     
+
+    </section>
+    <!--Section: Cards-->
+
+  </div>
+</main>
+<!--Main layout-->

@@ -1,0 +1,25 @@
+#userImg{
+    border-radius: 50%;
+    width: 9vh;
+    height:80px;
+    border: 1px solid cornflowerblue;
+    margin-bottom: 8px;
+}
+#cotainer{
+    margin-top:8%;
+    box-shadow: gainsboro 5px 5px 20px, gainsboro -5px -5px 20px;
+    padding: 30px;
+    border-radius:1%;
+}
+input, textarea {
+    outline: none;
+   
+   
+     border: none;
+   }
+
+  input:focus{
+    border: none;
+    box-shadow:none;
+  } 
+
