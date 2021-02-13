@@ -19,17 +19,32 @@
              <p class="mr-5">
                 {{blog.body}}
              </p>
+
+            
+
            </div>
        </div>
       
        <img src="{{'http://localhost:9000/'+blog.img}} " id="imgBody"/>
 
 
-     
-        <div class="form-group d-inline ">
-            <textarea class="form-control col-9 d-inline mt-5" id="exampleFormControlTextarea1" rows="3" #text placeholder="add comment" style="resize: none;"></textarea>
-            <i class="fa fa-location-arrow align-top send" (click)="addComment(blog._id,text.value)"></i>
-          </div>
+     <form [formGroup]="commentform"  (ngSubmit)="onsubmit(blog._id)">
+        <div class="form-group d-inline  ">
+            <textarea class="form-control col-6 d-inline mt-5" id="exampleFormControlTextarea1" rows="3" #text placeholder="add comment" style="resize: none;" formControlName="comment"></textarea>
+            <img  id="commentImg" [src]="imageURL " *ngIf="imageURL && imageURL !== ''" style="margin-top: -75px; margin-left: 20px;" />
+                <span id="cam2" class="ml-3">
+                    <label for="file-input">
+                      <i class="fa fa-camera" style="font-size:22px;color: rgb(22, 3, 3);"></i>
+                    </label>
+                    <input id="file-input" type="file" (change)="onFileSelect($event)" />
+                </span>
+              <label for="add"  class="align-top">
+                <i class="fa fa-location-arrow align-top send"></i>
+              </label>
+              <input id="add" type="submit" class="d-none"  >
+
+              </div>
+       </form>
 
     </section>
     <!--end  blog -->
@@ -46,12 +61,19 @@
                     </div>
               
                     <p>{{c.text}}</p>
+
+                    <img src="{{'http://localhost:9000/'+c.img}} " id="commentImg" *ngIf="c.img">
               
                
                   </div>
               </div>
           </div>
       </div>
+
+
+    
+
+       
      <!--end comment-->
     </div>
 

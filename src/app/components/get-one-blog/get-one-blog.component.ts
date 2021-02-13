@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as $ from "jquery";
 import { Blog } from 'src/app/models/blog';
@@ -14,9 +15,19 @@ import { CommentService } from 'src/app/services/comment.service';
 export class GetOneBlogComponent implements OnInit {
    blog:Blog|null=null;
    comments:Comment[];
-   
-  constructor(private router:ActivatedRoute,private blogService:BlogService , private commentService:CommentService) {
+   imageURL: string
+   selectedFile:File;
+   commentform:FormGroup;
+  constructor(private fb:FormBuilder,private router:ActivatedRoute,private blogService:BlogService , private commentService:CommentService) {
     
+
+    this.commentform=this.fb.group({
+      comment:[''],
+
+
+    });
+
+
   }
 
 
@@ -39,21 +50,37 @@ export class GetOneBlogComponent implements OnInit {
      })
 
   }
-
-  addComment(id:String,text:string){
+  onsubmit(id:String){
+ 
+    const fd = new FormData();
+    if(this.selectedFile==undefined){
+     fd.append('text',this.commentform.value.comment);
+    }else{
+      fd.append('text',this.commentform.value.comment);
+    fd.append('img' , this.selectedFile,this.selectedFile.name);
+    }
     debugger;
-    const fd =new FormData();
-     fd.append('text',text);
-      this.commentService.AddComment(id,fd).subscribe(d=>{
-        this.ngOnInit();
-      })
+    this.commentService.AddComment(id,fd).subscribe(d=>{
+      this.ngOnInit();
+      console.log(d);
+    })
+   }
+
+
+
+
+      
+  onFileSelect(event:any) {
+    this.selectedFile =<File> event.target.files[0];
+  
+
+    // File Preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageURL = reader.result as string;
+    }
+    reader.readAsDataURL(this.selectedFile )
   }
 
-
-  time(c:string):string{
-
-    console.log(c)
-    return "";
-  }
 
 }
